@@ -1,0 +1,35 @@
+{
+  "name": "registry-url",
+  "version": "0.0.0",
+  "description": "Get the set npm registry URL",
+  "license": "MIT",
+  "repository": "sindresorhus/registry-url",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "http://sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "npm",
+    "conf",
+    "config",
+    "npmconf",
+    "registry",
+    "url"
+  ],
+  "dependencies": {
+    "npmconf": "^1.0.5"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  }
+}
