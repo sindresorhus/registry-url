@@ -1,6 +1,6 @@
 {
   "name": "registry-url",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Get the set npm registry URL",
   "license": "MIT",
   "repository": "sindresorhus/registry-url",
