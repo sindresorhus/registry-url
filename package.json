@@ -27,7 +27,7 @@
     "url"
   ],
   "dependencies": {
-    "npmconf": "^1.0.5"
+    "npmconf": "^2.0.1"
   },
   "devDependencies": {
     "mocha": "*"
