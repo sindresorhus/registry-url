@@ -1,12 +1,20 @@
 'use strict';
 var assert = require('assert');
-var registryUrl = require('./');
+var fs = require('fs');
+var requireUncached = require('require-uncached');
 
-it('should get the npm registry URL from the npm config', function (cb) {
-	registryUrl(function (err, url) {
-		console.log('Registry URL:', url);
+it('should get the npm registry URL globally', function () {
+	assert(requireUncached('./').length);
+});
+
+it('should get the npm registry URL locally', function (cb) {
+	fs.writeFile('.npmrc', 'registry=http://registry.npmjs.eu/', function (err) {
 		assert(!err, err);
-		assert(url.length > 0);
-		cb();
+		assert(requireUncached('./') === 'http://registry.npmjs.eu/');
+
+		fs.unlink('.npmrc', function (err) {
+			assert(!err, err);
+			cb();
+		});
 	});
 });
