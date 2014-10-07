@@ -27,9 +27,10 @@
     "url"
   ],
   "dependencies": {
-    "npmconf": "^2.0.1"
+    "rc": "^0.5.1"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "require-uncached": "^1.0.2"
   }
 }
