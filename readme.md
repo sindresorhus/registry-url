@@ -24,10 +24,8 @@ registry = 'https://custom-registry.com/'
 ```js
 var registryUrl = require('registry-url');
 
-registryUrl(function (err, url) {
-	console.log(url);
-	//=> https://custom-registry.com/
-});
+console.log(registryUrl);
+//=> https://custom-registry.com/
 ```
 
 
