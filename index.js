@@ -1,2 +1,2 @@
 'use strict';
-module.exports = require('rc')('npm').registry || 'http://registry.npmjs.org/';
+module.exports = require('rc')('npm').registry || 'https://registry.npmjs.org/';
