@@ -1,2 +1,6 @@
 'use strict';
-module.exports = require('rc')('npm').registry || 'https://registry.npmjs.org/';
+module.exports = function (scope) {
+	var rc = require('rc')('npm');
+	return rc[scope + ':registry'] ||
+		rc.registry || 'https://registry.npmjs.org/';
+};
