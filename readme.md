@@ -9,7 +9,7 @@ Use this if you do anything with the npm registry as users will expect it to use
 
 ## Install
 
-```sh
+```
 $ npm install --save registry-url
 ```
 
@@ -22,9 +22,9 @@ registry = 'https://custom-registry.com/'
 ```
 
 ```js
-var registryUrl = require('registry-url')();
+var registryUrl = require('registry-url');
 
-console.log(registryUrl);
+console.log(registryUrl());
 //=> https://custom-registry.com/
 ```
 
@@ -36,9 +36,9 @@ It can also retrieve the registry URL associated with an [npm scope](https://doc
 ```
 
 ```js
-var registryScopeUrl = require('registry-url')('@myco');
+var registryUrl = require('registry-url');
 
-console.log(registryScopeUrl);
+console.log(registryUrl('@myco'));
 //=> https://custom-registry.com/
 ```
 

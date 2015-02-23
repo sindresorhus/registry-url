@@ -7,7 +7,7 @@
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
-    "url": "http://sindresorhus.com"
+    "url": "sindresorhus.com"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -24,10 +24,12 @@
     "config",
     "npmconf",
     "registry",
-    "url"
+    "url",
+    "uri",
+    "scope"
   ],
   "dependencies": {
-    "rc": "^0.5.1"
+    "rc": "^0.6.0"
   },
   "devDependencies": {
     "mocha": "*",
