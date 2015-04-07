@@ -29,7 +29,7 @@
     "scope"
   ],
   "dependencies": {
-    "rc": "^0.6.0"
+    "rc": "^1.0.1"
   },
   "devDependencies": {
     "mocha": "*",
