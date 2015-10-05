@@ -22,10 +22,10 @@ registry = 'https://custom-registry.com/'
 ```
 
 ```js
-var registryUrl = require('registry-url');
+const registryUrl = require('registry-url');
 
 console.log(registryUrl());
-//=> https://custom-registry.com/
+//=> 'https://custom-registry.com/'
 ```
 
 It can also retrieve the registry URL associated with an [npm scope](https://docs.npmjs.com/misc/scope).
@@ -36,10 +36,10 @@ It can also retrieve the registry URL associated with an [npm scope](https://doc
 ```
 
 ```js
-var registryUrl = require('registry-url');
+const registryUrl = require('registry-url');
 
 console.log(registryUrl('@myco'));
-//=> https://custom-registry.com/
+//=> 'https://custom-registry.com/'
 ```
 
 If the provided scope is not in the user's `.npmrc` file, then `registry-url` will check for the existence of `registry`, or if that's not set, fallback to the default npm registry.
