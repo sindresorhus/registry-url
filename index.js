@@ -1,9 +1,6 @@
 'use strict';
 module.exports = function (scope) {
 	var rc = require('rc')('npm', {registry: 'https://registry.npmjs.org/'});
-	return appendTrailingSlash(rc[scope + ':registry'] || rc.registry);
+	var url = rc[scope + ':registry'] || rc.registry;
+	return url.slice(-1) === '/' ? url : url + '/';
 };
-
-function appendTrailingSlash(str) {
-	return str.slice(-1) === '/' ? str : str + '/';
-}
