@@ -13,7 +13,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "xo && ava --serial"
   },
   "files": [
     "index.js"
@@ -32,7 +32,9 @@
     "rc": "^1.0.1"
   },
   "devDependencies": {
-    "mocha": "*",
-    "require-uncached": "^1.0.2"
+    "ava": "*",
+    "pify": "^2.3.0",
+    "require-uncached": "^1.0.2",
+    "xo": "*"
   }
 }

@@ -1,44 +1,38 @@
-'use strict';
-var assert = require('assert');
-var fs = require('fs');
-var requireUncached = require('require-uncached');
+import fs from 'fs';
+import test from 'ava';
+import pify from 'pify';
+import requireUncached from 'require-uncached';
 
-it('should get the npm registry URL globally', function () {
-	assert(requireUncached('./')().length);
+const fsP = pify(fs, Promise);
+
+test.afterEach(async () => {
+	try {
+		await fsP.unlink('.npmrc');
+	} catch (err) {
+		if (err.code !== 'ENOENT') {
+			throw err;
+		}
+	}
 });
 
-it('should get the npm registry URL locally', function (cb) {
-	fs.writeFile('.npmrc', 'registry=http://registry.npmjs.eu/', function (err) {
-		assert(!err, err);
-		assert(requireUncached('./')() === 'http://registry.npmjs.eu/');
-
-		fs.unlink('.npmrc', function (err) {
-			assert(!err, err);
-			cb();
-		});
-	});
+test('get the npm registry URL globally', t => {
+	t.ok(requireUncached('./')().length);
 });
 
-it('should return local scope registry URL', function (cb) {
-	fs.writeFile('.npmrc', '@myco:registry=http://reg.example.com/', function (err) {
-		assert(!err, err);
-		assert(requireUncached('./')('@myco') === 'http://reg.example.com/');
+test('get the npm registry URL locally', async t => {
+	await fsP.writeFile('.npmrc', 'registry=http://registry.npmjs.eu/');
 
-		fs.unlink('.npmrc', function (err) {
-			assert(!err, err);
-			cb();
-		});
-	});
+	t.is(requireUncached('./')(), 'http://registry.npmjs.eu/');
 });
 
-it('should return default npm registry when scope registry not set', function (cb) {
-	fs.writeFile('.npmrc', '', function (err) {
-		assert(!err, err);
-		assert(requireUncached('./')('@invalidScope') === 'https://registry.npmjs.org/');
+test('get local scope registry URL', async t => {
+	await fsP.writeFile('.npmrc', '@myco:registry=http://reg.example.com/');
 
-		fs.unlink('.npmrc', function (err) {
-			assert(!err, err);
-			cb();
-		});
-	});
+	t.is(requireUncached('./')('@myco'), 'http://reg.example.com/');
+});
+
+test('return default npm registry when scope registry is not set', async t => {
+	await fsP.writeFile('.npmrc', '');
+
+	t.is(requireUncached('./')('@invalidScope'), 'https://registry.npmjs.org/');
 });
