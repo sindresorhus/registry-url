@@ -36,3 +36,15 @@ test('return default npm registry when scope registry is not set', async t => {
 
 	t.is(requireUncached('./')('@invalidScope'), 'https://registry.npmjs.org/');
 });
+
+test('add trailing slash to local npm registry URL', async t => {
+	await fsP.writeFile('.npmrc', 'registry=http://registry.npmjs.eu');
+
+	t.is(requireUncached('./')(), 'http://registry.npmjs.eu/');
+});
+
+test('add trailing slash to local scope registry URL', async t => {
+	await fsP.writeFile('.npmrc', '@myco:registry=http://reg.example.com');
+
+	t.is(requireUncached('./')('@myco'), 'http://reg.example.com/');
+});
