@@ -16,7 +16,7 @@ test.afterEach(async () => {
 });
 
 test('get the npm registry URL globally', t => {
-	t.ok(requireUncached('./')().length);
+	t.truthy(requireUncached('./')().length);
 });
 
 test('get the npm registry URL locally', async t => {
