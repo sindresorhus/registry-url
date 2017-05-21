@@ -47,4 +47,4 @@ If the provided scope is not in the user's `.npmrc` file, then `registry-url` wi
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)
