@@ -2,7 +2,7 @@
 
 > Get the set npm registry URL
 
-It's usually `https://registry.npmjs.org/`, but [configurable](https://www.npmjs.org/doc/misc/npm-config.html#registry).
+It's usually `https://registry.npmjs.org/`, but [configurable](https://docs.npmjs.com/misc/registry).
 
 Use this if you do anything with the npm registry as users will expect it to use their configured registry.
 
