@@ -5,6 +5,7 @@ import importFresh from 'import-fresh';
 
 const fsP = pify(fs);
 
+delete process.env.npm_config_registry;
 test.afterEach(async () => {
 	try {
 		await fsP.unlink('.npmrc');
@@ -13,6 +14,13 @@ test.afterEach(async () => {
 
 test('get the npm registry URL globally', t => {
 	t.truthy(importFresh('.')().length);
+});
+
+test('works with npm_config_registry in the environment', t => {
+	// eslint-disable-next-line camelcase
+	process.env.npm_config_registry = 'http://registry.example';
+	t.is(importFresh('.')(), 'http://registry.example/');
+	delete process.env.npm_config_registry;
 });
 
 test('get the npm registry URL locally', async t => {
