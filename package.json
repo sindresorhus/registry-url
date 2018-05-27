@@ -1,43 +1,43 @@
 {
-  "name": "registry-url",
-  "version": "3.1.0",
-  "description": "Get the set npm registry URL",
-  "license": "MIT",
-  "repository": "sindresorhus/registry-url",
-  "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com"
-  },
-  "engines": {
-    "node": ">=4"
-  },
-  "scripts": {
-    "test": "xo && ava"
-  },
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "npm",
-    "conf",
-    "config",
-    "npmconf",
-    "registry",
-    "url",
-    "uri",
-    "scope"
-  ],
-  "dependencies": {
-    "rc": "^1.2.7"
-  },
-  "devDependencies": {
-    "ava": "*",
-    "import-fresh": "^2.0.0",
-    "pify": "^2.3.0",
-    "xo": "*"
-  },
-  "ava": {
-    "serial": true
-  }
+	"name": "registry-url",
+	"version": "3.1.0",
+	"description": "Get the set npm registry URL",
+	"license": "MIT",
+	"repository": "sindresorhus/registry-url",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "sindresorhus.com"
+	},
+	"engines": {
+		"node": ">=6"
+	},
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"npm",
+		"conf",
+		"config",
+		"npmconf",
+		"registry",
+		"url",
+		"uri",
+		"scope"
+	],
+	"dependencies": {
+		"rc": "^1.2.7"
+	},
+	"devDependencies": {
+		"ava": "*",
+		"import-fresh": "^2.0.0",
+		"pify": "^3.0.0",
+		"xo": "*"
+	},
+	"ava": {
+		"serial": true
+	}
 }

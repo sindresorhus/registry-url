@@ -9,7 +9,7 @@ delete process.env.npm_config_registry;
 test.afterEach(async () => {
 	try {
 		await fsP.unlink('.npmrc');
-	} catch (err) {}
+	} catch (_) {}
 });
 
 test('get the npm registry URL globally', t => {
