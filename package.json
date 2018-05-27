@@ -29,7 +29,7 @@
     "scope"
   ],
   "dependencies": {
-    "rc": "^1.0.1"
+    "rc": "^1.2.7"
   },
   "devDependencies": {
     "ava": "*",
