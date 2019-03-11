@@ -1,14 +1,15 @@
+import {promisify} from 'util';
 import fs from 'fs';
 import test from 'ava';
-import pify from 'pify';
 import importFresh from 'import-fresh';
 
-const fsP = pify(fs);
+const unlinkP = promisify(fs.unlink);
+const writeFileP = promisify(fs.writeFile);
 
 delete process.env.npm_config_registry;
 test.afterEach(async () => {
 	try {
-		await fsP.unlink('.npmrc');
+		await unlinkP('.npmrc');
 	} catch (_) {}
 });
 
@@ -24,31 +25,31 @@ test('works with npm_config_registry in the environment', t => {
 });
 
 test('get the npm registry URL locally', async t => {
-	await fsP.writeFile('.npmrc', 'registry=http://registry.npmjs.eu/');
+	await writeFileP('.npmrc', 'registry=http://registry.npmjs.eu/');
 
 	t.is(importFresh('.')(), 'http://registry.npmjs.eu/');
 });
 
 test('get local scope registry URL', async t => {
-	await fsP.writeFile('.npmrc', '@myco:registry=http://reg.example.com/');
+	await writeFileP('.npmrc', '@myco:registry=http://reg.example.com/');
 
 	t.is(importFresh('.')('@myco'), 'http://reg.example.com/');
 });
 
 test('return default npm registry when scope registry is not set', async t => {
-	await fsP.writeFile('.npmrc', '');
+	await writeFileP('.npmrc', '');
 
 	t.is(importFresh('.')('@invalidScope'), 'https://registry.npmjs.org/');
 });
 
 test('add trailing slash to local npm registry URL', async t => {
-	await fsP.writeFile('.npmrc', 'registry=http://registry.npmjs.eu');
+	await writeFileP('.npmrc', 'registry=http://registry.npmjs.eu');
 
 	t.is(importFresh('.')(), 'http://registry.npmjs.eu/');
 });
 
 test('add trailing slash to local scope registry URL', async t => {
-	await fsP.writeFile('.npmrc', '@myco:registry=http://reg.example.com');
+	await writeFileP('.npmrc', '@myco:registry=http://reg.example.com');
 
 	t.is(importFresh('.')('@myco'), 'http://reg.example.com/');
 });
