@@ -8,4 +8,5 @@ const registryUrl = scope => {
 };
 
 module.exports = registryUrl;
+// TODO: Remove this for the next major release
 module.exports.default = registryUrl;

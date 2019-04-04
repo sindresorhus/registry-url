@@ -1,5 +1,5 @@
-import {expectType} from 'tsd-check';
-import registryUrl from '.';
+import {expectType} from 'tsd';
+import registryUrl = require('.');
 
 expectType<string>(registryUrl());
 expectType<string>(registryUrl('@myco'));
