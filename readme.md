@@ -1,4 +1,4 @@
-# registry-url [![Build Status](https://travis-ci.org/sindresorhus/registry-url.svg?branch=master)](https://travis-ci.org/sindresorhus/registry-url)
+# registry-url
 
 > Get the set npm registry URL
 
