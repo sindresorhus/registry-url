@@ -2,15 +2,16 @@ import {readFileSync} from 'node:fs';
 import {findUpSync} from 'find-up-simple';
 import {parse} from 'ini';
 
+const normalize = url => url.endsWith('/') ? url : `${url}/`;
+
 export default function registryUrl(scope) {
 	const defaultRegistry = 'https://registry.npmjs.org/';
 	const npmRcPath = findUpSync('.npmrc');
 	if (!npmRcPath) {
-		return process.env.npm_config_registry || defaultRegistry;
+		return normalize(process.env.npm_config_registry || defaultRegistry);
 	}
 
 	const content = readFileSync(npmRcPath, 'utf8');
 	const result = parse(content);
-	const url = result[`${scope}:registry`] || process.env.npm_config_registry || result.registry || defaultRegistry;
-	return url.endsWith('/') ? url : `${url}/`;
+	return normalize(result[`${scope}:registry`] || process.env.npm_config_registry || result.registry || defaultRegistry);
 }
