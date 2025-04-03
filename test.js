@@ -1,17 +1,13 @@
-import {promisify} from 'node:util';
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import process from 'node:process';
 import test from 'ava';
 
 const importFresh = async modulePath => import(`${modulePath}?x=${new Date()}`);
 
-const unlinkP = promisify(fs.unlink);
-const writeFileP = promisify(fs.writeFile);
-
 delete process.env.npm_config_registry;
 test.afterEach(async () => {
 	try {
-		await unlinkP('.npmrc');
+		await fs.unlink('.npmrc');
 	} catch {}
 });
 
@@ -29,35 +25,35 @@ test('works with npm_config_registry in the environment', async t => {
 });
 
 test('get the npm registry URL locally', async t => {
-	await writeFileP('.npmrc', 'registry=http://registry.npmjs.eu/');
+	await fs.writeFile('.npmrc', 'registry=http://registry.npmjs.eu/');
 
 	const {default: registryUrl} = await importFresh('./index.js');
 	t.is(registryUrl(), 'http://registry.npmjs.eu/');
 });
 
 test('get local scope registry URL', async t => {
-	await writeFileP('.npmrc', '@myco:registry=http://reg.example.com/');
+	await fs.writeFile('.npmrc', '@myco:registry=http://reg.example.com/');
 
 	const {default: registryUrl} = await importFresh('./index.js');
 	t.is(registryUrl('@myco'), 'http://reg.example.com/');
 });
 
 test('return default npm registry when scope registry is not set', async t => {
-	await writeFileP('.npmrc', '');
+	await fs.writeFile('.npmrc', '');
 
 	const {default: registryUrl} = await importFresh('./index.js');
 	t.is(registryUrl('@invalidScope'), 'https://registry.npmjs.org/');
 });
 
 test('add trailing slash to local npm registry URL', async t => {
-	await writeFileP('.npmrc', 'registry=http://registry.npmjs.eu');
+	await fs.writeFile('.npmrc', 'registry=http://registry.npmjs.eu');
 
 	const {default: registryUrl} = await importFresh('./index.js');
 	t.is(registryUrl(), 'http://registry.npmjs.eu/');
 });
 
 test('add trailing slash to local scope registry URL', async t => {
-	await writeFileP('.npmrc', '@myco:registry=http://reg.example.com');
+	await fs.writeFile('.npmrc', '@myco:registry=http://reg.example.com');
 
 	const {default: registryUrl} = await importFresh('./index.js');
 	t.is(registryUrl('@myco'), 'http://reg.example.com/');

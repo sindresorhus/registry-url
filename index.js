@@ -7,6 +7,7 @@ const normalize = url => url.endsWith('/') ? url : `${url}/`;
 
 export default function registryUrl(scope) {
 	const defaultRegistry = 'https://registry.npmjs.org/';
+
 	const npmRcPath = findUpSync('.npmrc');
 	if (!npmRcPath) {
 		return normalize(process.env.npm_config_registry || defaultRegistry);
