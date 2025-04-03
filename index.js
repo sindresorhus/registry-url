@@ -1,4 +1,5 @@
 import {readFileSync} from 'node:fs';
+import process from 'node:process';
 import {findUpSync} from 'find-up-simple';
 import {parse} from 'ini';
 
