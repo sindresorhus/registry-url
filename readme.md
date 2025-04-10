@@ -26,7 +26,7 @@ console.log(registryUrl());
 //=> 'https://custom-registry.com/'
 
 console.log(defaultUrl);
-// => 'https://registry.npmjs.org/'
+//=> 'https://registry.npmjs.org/'
 ```
 
 It can also retrieve the registry URL associated with an [npm scope](https://docs.npmjs.com/misc/scope).
