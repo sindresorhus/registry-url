@@ -1,5 +1,6 @@
 import {expectType} from 'tsd';
-import registryUrl from './index.js';
+import registryUrl, {defaultUrl} from './index.js';
 
+expectType<string>(defaultUrl);
 expectType<string>(registryUrl());
 expectType<string>(registryUrl('@myco'));

@@ -35,3 +35,8 @@ console.log(registryUrl('@myco'));
 ```
 */
 export default function registryUrl(scope?: string): string;
+
+/**
+The default npm registry URL.
+*/
+export const defaultUrl: string;
