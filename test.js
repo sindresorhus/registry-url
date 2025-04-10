@@ -58,3 +58,8 @@ test('add trailing slash to local scope registry URL', async t => {
 	const {default: registryUrl} = await importFresh('./index.js');
 	t.is(registryUrl('@myco'), 'http://reg.example.com/');
 });
+
+test('default npm registry url is https://registry.npmjs.org/', async t => {
+	const {defaultUrl} = await importFresh('./index.js');
+	t.is(defaultUrl, 'https://registry.npmjs.org/');
+});
