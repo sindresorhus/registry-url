@@ -20,10 +20,13 @@ registry = 'https://custom-registry.com/'
 ```
 
 ```js
-import registryUrl from 'registry-url';
+import registryUrl, {defaultUrl} from 'registry-url';
 
 console.log(registryUrl());
 //=> 'https://custom-registry.com/'
+
+console.log(defaultUrl);
+//=> 'https://registry.npmjs.org/'
 ```
 
 It can also retrieve the registry URL associated with an [npm scope](https://docs.npmjs.com/misc/scope).
