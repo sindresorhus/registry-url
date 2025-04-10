@@ -24,6 +24,7 @@ import registryUrl, {defaultUrl} from 'registry-url';
 
 console.log(registryUrl());
 //=> 'https://custom-registry.com/'
+
 console.log(defaultUrl);
 // => 'https://registry.npmjs.org/'
 ```
