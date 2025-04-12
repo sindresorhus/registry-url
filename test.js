@@ -42,6 +42,16 @@ test('npm_config_registry has higher priority than NPM_CONFIG_REGISTRY', async t
 	delete process.env.NPM_CONFIG_REGISTRY;
 });
 
+test('npm_config_registry has higher priority than .npmrc', async t => {
+	await fs.writeFile('.npmrc', 'registry=http://registry.npmjs.eu/');
+
+	// eslint-disable-next-line camelcase
+	process.env.npm_config_registry = 'http://registry.example';
+	const {default: registryUrl} = await importFresh('./index.js');
+	t.is(registryUrl(), 'http://registry.example/');
+	delete process.env.npm_config_registry;
+});
+
 test('get the npm registry URL locally', async t => {
 	await fs.writeFile('.npmrc', 'registry=http://registry.npmjs.eu/');
 
