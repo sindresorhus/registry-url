@@ -5,6 +5,7 @@ import test from 'ava';
 const importFresh = async modulePath => import(`${modulePath}?x=${new Date()}`);
 
 delete process.env.npm_config_registry;
+delete process.env.NPM_CONFIG_REGISTRY;
 test.afterEach(async () => {
 	try {
 		await fs.unlink('.npmrc');
@@ -22,6 +23,23 @@ test('works with npm_config_registry in the environment', async t => {
 	const {default: registryUrl} = await importFresh('./index.js');
 	t.is(registryUrl(), 'http://registry.example/');
 	delete process.env.npm_config_registry;
+});
+
+test('works with NPM_CONFIG_REGISTRY in the environment', async t => {
+	process.env.NPM_CONFIG_REGISTRY = 'http://registry.example';
+	const {default: registryUrl} = await importFresh('./index.js');
+	t.is(registryUrl(), 'http://registry.example/');
+	delete process.env.NPM_CONFIG_REGISTRY;
+});
+
+test('npm_config_registry has higher priority than NPM_CONFIG_REGISTRY', async t => {
+	// eslint-disable-next-line camelcase
+	process.env.npm_config_registry = 'http://registry.example1';
+	process.env.NPM_CONFIG_REGISTRY = 'http://registry.example2';
+	const {default: registryUrl} = await importFresh('./index.js');
+	t.is(registryUrl(), 'http://registry.example1/');
+	delete process.env.npm_config_registry;
+	delete process.env.NPM_CONFIG_REGISTRY;
 });
 
 test('get the npm registry URL locally', async t => {

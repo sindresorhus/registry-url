@@ -8,12 +8,16 @@ export const defaultUrl = 'https://registry.npmjs.org/';
 const normalize = url => url.endsWith('/') ? url : `${url}/`;
 
 export default function registryUrl(scope) {
+	// Lowercased one is priority.
+	// Run `NPM_CONFIG_REGISTRY=foo npm_config_registry=bar npm config get registry` to check.
+	const npmConfigRegistry = process.env.npm_config_registry || process.env.NPM_CONFIG_REGISTRY;
+
 	const npmRcPath = findUpSync('.npmrc');
 	if (!npmRcPath) {
-		return normalize(process.env.npm_config_registry || defaultUrl);
+		return normalize(npmConfigRegistry || defaultUrl);
 	}
 
 	const content = readFileSync(npmRcPath, 'utf8');
 	const result = parse(content);
-	return normalize(result[`${scope}:registry`] || process.env.npm_config_registry || result.registry || defaultUrl);
+	return normalize(result[`${scope}:registry`] || npmConfigRegistry || result.registry || defaultUrl);
 }
